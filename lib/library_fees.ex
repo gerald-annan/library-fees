@@ -4,6 +4,7 @@ defmodule LibraryFees do
   end
 
   def before_noon?(datetime) do
+    :lt == NaiveDateTime.to_time(datetime) |> Time.compare(~T[12:00:00])
   end
 
   def return_date(checkout_datetime) do

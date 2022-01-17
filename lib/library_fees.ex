@@ -25,5 +25,8 @@ defmodule LibraryFees do
   end
 
   def calculate_late_fee(checkout, return, rate) do
+    diff = return_date(datetime_from_string(checkout)) |> days_late(datetime_from_string(return))
+    total_rate = rate * diff
+    if monday?(datetime_from_string(return)), do: trunc(total_rate * 0.5), else: total_rate
   end
 end
